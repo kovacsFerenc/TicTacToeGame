@@ -18,6 +18,8 @@ HighScorePlayer1 = 0
 HighScorePlayer2 = 0
 
 # This Function Draws Game Board
+
+
 def DrawBoard():   
     os.system("clear") 
     print(" %c | %c | %c " % (board[7],board[8],board[9]))    
@@ -26,7 +28,8 @@ def DrawBoard():
     print("___|___|___")    
     print(" %c | %c | %c " % (board[1],board[2],board[3]))    
     print("   |   |   ")
-    print(HighScorePlayer1)
+    print('High Score Player 2: ' + str(HighScorePlayer1))
+    print('High Score Player 1: ' + str(HighScorePlayer2))
    
 #This Function Checks position is empty or not    
 def CheckPosition(x): 
@@ -36,19 +39,21 @@ def CheckPosition(x):
     except IndexError:
         print("Invalid input")
     else:    
-        return False    
-   
-# This Function Checks player has won or not    
-def CheckWin(): 
-    global Game    
-    # Horizontal winning condition    
-    if(board[1] == board[2] and board[2] == board[3] and board[1] != ' '):    
-        Game = Win 
-    elif(board[4] == board[5] and board[5] == board[6] and board[4] != ' '):    
-        Game = Win    
-    elif(board[7] == board[8] and board[8] == board[9] and board[7] != ' '):    
-        Game = Win    
-    # Vertical Winning Condition    
+        return False
+
+# This Function Checks player has won or not
+
+
+def CheckWin():
+    global Game
+    # Horizontal winning condition
+    if(board[1] == board[2] and board[2] == board[3] and board[1] != ' '):
+        Game = Win
+    elif(board[4] == board[5] and board[5] == board[6] and board[4] != ' '):
+        Game = Win
+    elif(board[7] == board[8] and board[8] == board[9] and board[7] != ' '):
+        Game = Win
+    # Vertical Winning Condition
     elif(board[1] == board[4] and board[4] == board[7] and board[1] != ' '):    
         Game = Win    
     elif(board[2] == board[5] and board[5] == board[8] and board[2] != ' '):    
@@ -67,9 +72,8 @@ def CheckWin():
         Game = Running
 
 
-
-print("Tic-Tac-Toe Game By Andras & Feri")   
-print("Player 1 [X] --- Player 2 [O]\n")   
+print("Tic-Tac-Toe Game By Andras & Feri")
+print("Player 1 [X] --- Player 2 [O]\n")
 print("Please Wait...")
 
 
@@ -93,6 +97,18 @@ def running_loop():
             board[choice] = Mark
             player += 1
             CheckWin()
+            DrawBoard()
+
+
+def highscore():
+    global HighScorePlayer1
+    global HighScorePlayer2
+    if Game == Win and player % 2 != 0:
+        HighScorePlayer1 += 1
+        print('High Score Player 2: ' + str(HighScorePlayer1))
+    elif Game == Win and player % 2 == 0:
+        HighScorePlayer2 += 1
+        print('High Score Player 1: ' + str(HighScorePlayer2))
 
 
 def game_start():
@@ -114,11 +130,12 @@ def game_start():
 # Main 
 #fostam
 
-playagain = 'yes'
-while playagain == 'yes': 
+playagain = "yes"
+while playagain == "yes":
     board = ['0', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     game_start()
     running_loop()
     print('Do you want to play again? (yes or no)')
+    highscore()
     playagain = input()
     Game = Running

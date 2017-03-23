@@ -128,14 +128,17 @@ def game_start():
             HighScorePlayer2 += 1
 
 # Main 
-#fostam
 
-playagain = "yes"
-while playagain == "yes":
-    board = ['0', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-    game_start()
-    running_loop()
-    print('Do you want to play again? (yes or no)')
-    highscore()
-    playagain = input()
-    Game = Running
+
+def main():
+    playagain = "yes"
+    while playagain == "yes":
+        board = ['0', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        game_start()
+        running_loop()
+        print('Do you want to play again? (yes or no)')
+        highscore()
+        playagain = input()
+        Game = Running
+
+main()
